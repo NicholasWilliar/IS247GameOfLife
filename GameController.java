@@ -44,6 +44,7 @@ public class GameController
 		}
 		public void sleepEntered(int s) {
 			model.setSleepTime(s);
+			view.displayGen(model.gameGeneration());
 		}
 		
 		public static void main(String[] args) {
