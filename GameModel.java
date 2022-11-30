@@ -57,8 +57,6 @@ public class GameModel
 		
 		//Copy pattern into center of 2D array. HOW?
 		
-		//Executing game of life for specified number of generations.
-		
 		public char[][] gameGeneration() {
 			//Create 2D arrays for current gen and next gen.
 			gen1 = new char[height][width];
