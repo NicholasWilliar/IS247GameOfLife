@@ -63,6 +63,7 @@ public class GameModel
 			gen2 = new char[height][width];
 			
 			//Executing game of life for specified number of generations.
+			//Need to find alternative here because only one generation can be returned at a time.
 			for(int k = 0; k < generations; k++) {
 				//Iterating through 2D array (one generation for game of life)
 				for(int i = 0; i < gen1.length; i++) {
