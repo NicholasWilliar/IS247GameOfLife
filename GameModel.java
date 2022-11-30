@@ -114,7 +114,7 @@ public class GameModel
 						}
 				
 						//Birth, survival, and overcrowding/loneliness rules executed.
-						if(count == 3 && !gen1[i][j].equals(liveCell)) {
+						if(count == 3 && gen1[i][j].equals(deadCell)) {
 							gen2[i][j] = liveCell;
 						} else if ((count == 2 || count == 3) && gen1[i][j].equals(liveCell)) {
 							gen2[i][j] = liveCell;
@@ -124,6 +124,7 @@ public class GameModel
 					}
 				}
 				
+				//Can't do this. How to repeat generations?
 				return gen2;
 			}
 			//Wipe gen1 and copy gen2 into gen1.
