@@ -22,6 +22,9 @@ public interface QueryListener {
 	
 	//Time between generations has been entered.
 	void sleepEntered(int s);
+	
+	//Pattern file name has been entered.
+	void patternEntered(String p);
 }
 
 
