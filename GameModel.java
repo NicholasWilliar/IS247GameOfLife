@@ -10,7 +10,9 @@ public class GameModel
 		private int width;
 		private char liveCell;
 		private char deadCell;
+		/* MIGHT BE WRONG PLACE
 		private int generations;
+		*/
 		private int sleepTime;
 		private String pattern;
 		private char[][] gen1;
