@@ -19,6 +19,7 @@ public class GameController
 			view.setDelimiterPrompt("Enter delimiter character: ");
 			view.setGenPrompt("Enter number of generations: ");
 			view.setSleepPrompt("Enter time between generations (ms): ");
+			view.setPattern("Enter pattern file name: ");
 			view.setListener(this);
 			view.show();
 		}
@@ -39,13 +40,25 @@ public class GameController
 		public void delimiterEntered(char del) {
 			model.setDelimiter(del);
 		}
+		/* MIGHT BE WRONG PLACE
 		public void genEntered(int g) {
 			model.setGenerations(g);
 		}
+		*/
 		public void sleepEntered(int s) {
 			model.setSleepTime(s);
+		}
+		public void patternEntered(String p) {
+			model.setPattern(p);
+			model.createGrid();
+		}
+		
+		/* REFERENCE / UNFIMPLEMENTED	
+		//For loop to execute multiple generations of game. INCOMPLETE (I think this goes in the view code?)
+		for(int i = 0; i < generations; i++) {
 			view.displayGen(model.gameGeneration());
 		}
+		*/
 		
 		public static void main(String[] args) {
 			if (args.length < 2) {
