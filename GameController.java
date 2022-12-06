@@ -19,7 +19,7 @@ public class GameController
 			view.setDelimiterPrompt("Enter delimiter character: ");
 			view.setGenPrompt("Enter number of generations: ");
 			view.setSleepPrompt("Enter time between generations (ms): ");
-			view.setPattern("Enter pattern file name: ");
+			view.setPatternPrompt("Enter pattern file name: ");
 			view.setListener(this);
 			view.show();
 		}
