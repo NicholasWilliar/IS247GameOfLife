@@ -78,19 +78,9 @@ public class GameView implements GameViewInterface {
        		} // rows
     	} // displayGen
 } // end	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+
+
 		/*Reference
 		
 		//Printing current gen array.
