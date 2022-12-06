@@ -33,8 +33,8 @@ public interface GameViewInterface {
 	void setGenPrompt(String g);
 	
 	//Set sleep prompt.
-	void setSleep(String s);
+	void setSleepPrompt(String s);
 	
 	//Set pattern prompt.
-	void setPattern(String p);
+	void setPatternPrompt(String p);
 }
