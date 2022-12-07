@@ -72,7 +72,7 @@ public class GameModel
 			}
 			
 			//Create cursors to mark rough center of 2D array.
-			int hCursor = (height / 2) - 1;
+			int hCursor = 0;
 			
 			//Handle exception.
 			try {
@@ -82,7 +82,7 @@ public class GameModel
 				//Set pattern in rough center of 2D array line by line.
 				while(fileScan.hasNext()) {
 					line = fileScan.nextLine();
-					int wCursor = (width / 2) - 1;
+					int wCursor = 0;
 					for(int i = 0; i < line.length(); i++) {
 						if(line.charAt(i) == '*') {
 							gen2[hCursor][wCursor] = liveCell;
@@ -151,8 +151,8 @@ public class GameModel
 					}
 				
 					//Counting live neighbors.
-					for(int m = minRow; m < maxRow; m++) {
-						for(int n = minCol; n < maxCol; n++) {
+					for(int m = minRow; m <= maxRow; m++) {
+						for(int n = minCol; n <= maxCol; n++) {
 							if(gen1[m][n] == liveCell) {
 								count++;
 							}
