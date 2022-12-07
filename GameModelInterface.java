@@ -17,11 +17,6 @@ public interface GameModelInterface {
 	//Sets character of dead cells.
 	void setDead(char d);
 	
-	/* MIGHT BE WRONG PLACE
-	//Sets number of generations.
-	void setGenerations(int g);
-	*/
-	
 	//Sets sleep time between generations.
 	void setSleep(int s);
 	
@@ -29,7 +24,7 @@ public interface GameModelInterface {
 	void setPattern(String p);
 	
 	//Creates grid and copies pattern into rough center.
-	void createGrid();
+	char[][] createGrid();
 	
 	//Executes game of life generation.
 	char[][] gameGeneration();
