@@ -43,34 +43,4 @@ public interface GameViewInterface {
 	
 	//Set pattern prompt.
 	void setPatternPrompt(String p);
-	
-	//Get height prompt.
-	String getHeightPrompt();
-	
-	//Get width prompt.
-	String getWidthPrompt();
-	
-	//Get live character prompt.
-	String getLivePrompt();
-	
-	//Get dead character prompt.
-	String getDeadPrompt();
-	
-	//Get delimiter character prompt.
-	String getDelimiterPrompt();
-	
-	//Get delimiter.
-	char getDelimiter();
-	
-	//Get generations prompt.
-	String getGenPrompt();
-	
-	//Get current generation.
-	int getCurGen();
-	
-	//Get sleep prompt.
-	String getSleepPrompt();
-	
-	//Get pattern prompt.
-	String getPatternPrompt();
 }
