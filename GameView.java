@@ -172,9 +172,12 @@ public class GameView implements GameViewInterface {
             } // columns
 			System.out.println();
         } // rows
-		//Print delimiter.
-		for() {
-			System.out.print(delimiter);
-		}
+	
+	//display delimiter
+	char[] delimiterArray = new char[g.length];
+        for (char c:delimiterArray){
+            delimiter[c] = delimiter;
+            System.out.print(delimiter[c]);
+        }
     } // displayGen
 } // end	
