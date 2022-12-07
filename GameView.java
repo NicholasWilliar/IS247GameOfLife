@@ -69,43 +69,43 @@ public class GameView implements GameViewInterface {
     }
 	
 	//Get prompts.
-	public String getHeightPrompt() {
+	protected String getHeightPrompt() {
 		return heightPrompt;
 	}
 	
-	public String getWidthPrompt() {
+	protected String getWidthPrompt() {
 		return widthPrompt;
 	}
 	
-	public String getLivePrompt() {
+	protected String getLivePrompt() {
 		return livePrompt;
 	}
 	
-	public String getDeadPrompt() {
+	protected String getDeadPrompt() {
 		return deadPrompt;
 	}
 	
-	public String getDelimiterPrompt() {
+	protected String getDelimiterPrompt() {
 		return delimiterPrompt;
 	}
 	
-	public char getDelimiter() {
+	protected char getDelimiter() {
 		return delimiter;
 	}
 	
-	public String getGenPrompt() {
+	protected String getGenPrompt() {
 		return genPrompt;
 	}
 	
-	public int getCurGen() {
+	protected int getCurGen() {
 		return curGen;
 	}
 	
-	public String getSleepPrompt() {
+	protected String getSleepPrompt() {
 		return sleepPrompt;
 	}
 	
-	public String getPatternPrompt() {
+	protected String getPatternPrompt() {
 		return patternPrompt;
 	}
 
@@ -115,14 +115,12 @@ public class GameView implements GameViewInterface {
 		int width;
 		char live;
 		char dead;
-		char delimiter;
 		int gen;
 		int sleep;
 		String pattern;
         String input = "";
         boolean exit = false;
 
-       // while (!exit) {
         System.out.println(getHeightPrompt());
 		height = sc.nextInt();
 		queryListener.heightEntered(height);
