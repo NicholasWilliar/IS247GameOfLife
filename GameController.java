@@ -59,12 +59,7 @@ public class GameController
 				view.displayGen(model.gameGeneration());
 			}
 		}
-		public void quit() {
-			view = null;
-			model = null;
-			System.exit(0);
-		}
-		
+
 		public static void main(String[] args) {
 			if (args.length < 2) {
 				System.out.println("Usage: java GameController <ViewClassName> <ModelClassName>");
