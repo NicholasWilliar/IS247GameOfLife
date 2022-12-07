@@ -3,6 +3,8 @@
 * Katarina Nitz & Nicholas Williar
 * Model Code
 */
+import java.util.*;
+import java.io.*;
 
 public class GameModel 
 	implements GameModelInterface {
@@ -10,9 +12,6 @@ public class GameModel
 		private int width;
 		private char liveCell;
 		private char deadCell;
-		/* MIGHT BE WRONG PLACE
-		private int generations;
-		*/
 		private int sleepTime;
 		private String pattern;
 		private char[][] gen1;
@@ -22,12 +21,9 @@ public class GameModel
 		public GameModel() {
 			height = 10;
 			width = 10;
-			liveCell = "*";
-			deadCell = " ";
-			/* MIGHT BE WRONG PLACE
-			generations = "20";
-			*/
-			sleepTime = "250";
+			liveCell = '*';
+			deadCell = ' ';
+			sleepTime = 250;
 			pattern = "Glider.pat";
 		}
 		
@@ -35,12 +31,9 @@ public class GameModel
 		public GameModel(int h, int w, char l, char d, int g, int s, String p) {
 			setHeight(h);
 			setWidth(w);
-			setLiveCell(l);
-			setDeadCell(d);
-			/* MIGHT BE WRONG PLACE
-			setGenerations(g);
-			*/
-			setSleepTime(s);
+			setLive(l);
+			setDead(d);
+			setSleep(s);
 			setPattern(p);
 		}
 		
@@ -57,12 +50,7 @@ public class GameModel
 		public void setDead(char d) {
 			this.deadCell = d;
 		}
-		/* MIGHT BE WRONG PLACE
-		public void setGenerations(int g) {
-			this.generations = g;
-		}
-		*/
-		public void setSleepTime(int s) {
+		public void setSleep(int s) {
 			this.sleepTime = s;
 		}
 		public void setPattern(String p) {
@@ -70,35 +58,50 @@ public class GameModel
 		}
 		
 		//Create game board and copy pattern into center of 2D array.
-		public void createGrid() {
+		public char[][] createGrid() {
 			String line;
+			int count = 0;
 			
 			//Create 2D arrays for current gen and next gen. 
 			gen1 = new char[height][width];
 			gen2 = new char[height][width];
 			
-			//Create cursors to mark rough center of 2D array.
-			int hCursor = height / 2;
-			int wCursor = width / 2;
-			
-			//Create scanner to scan through pattern file.
-			Scanner fileScan = new Scanner (new File(pattern));
-			
-			//Set pattern in rough center of 2D array line by line.
-			while(fileScan.hasNext()) {
-				line = fileScan.nextLine();
-				
-				for(int i = 0; i < line.length(); i++) {
-					gen2[hCursor][wCursor] = line.charAt[i];
-					wCursor++;
-				}
-				hCursor++;
+			//Fill gen2 array with dead cells.
+			for (char[] row: gen2) {
+				Arrays.fill(row, deadCell);
 			}
+			
+			//Create cursors to mark rough center of 2D array.
+			int hCursor = (height / 2) - 1;
+			
+			//Handle exception.
+			try {
+				//Create scanner to scan through pattern file.
+				Scanner fileScan = new Scanner (new File(pattern));
+			
+				//Set pattern in rough center of 2D array line by line.
+				while(fileScan.hasNext()) {
+					line = fileScan.nextLine();
+					int wCursor = (width / 2) - 1;
+					for(int i = 0; i < line.length(); i++) {
+						if(line.charAt(i) == '*') {
+							gen2[hCursor][wCursor] = liveCell;
+							wCursor++;
+						} else {
+							wCursor++;
+						}
+					}
+					hCursor++;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return gen2;
 		}
 		
 		public char[][] gameGeneration() {
 			//Wipe gen1 and copy gen2 into gen1.
-			gen1 = new char[height][width]
+			gen1 = new char[height][width];
 			for(int i = 0; i < gen2.length; i++) {
 				for(int j = 0; j < gen2[i].length; j++) {
 					gen1[i][j] = gen2[i][j];
@@ -123,48 +126,48 @@ public class GameModel
 					int maxCol;
 				
 					//Checking for top edge.
-					if(gen1[i] == 0) {
-						minRow = gen1[i];
+					if(i == 0) {
+						minRow = i;
 					} else {
-						minRow = gen1[i] - 1;
+						minRow = i - 1;
 					}
 					//Checking for bottom edge.
-					if(gen1[i] == gen1.length - 1) {
-						maxRow = gen1[i];
+					if(i == gen1.length - 1) {
+						maxRow = i;
 					} else {
-						maxRow = gen1[i] + 1;
+						maxRow = i + 1;
 					}
 					//Checking for left edge.
-					if(gen1[j] == 0) {
-						minCol = gen1[j];
+					if(j == 0) {
+						minCol = j;
 					} else {
-						minCol = gen1[j] - 1;
+						minCol = j - 1;
 					}
 					//Checking for right edge.
-					if(gen1[j] == gen1[i].length - 1) {
-						maxCol = gen1[j];
+					if(j == gen1[i].length - 1) {
+						maxCol = j;
 					} else {
-						maxCol = gen1[j] + 1;
+						maxCol = j + 1;
 					}
 				
 					//Counting live neighbors.
-					for(m = minRow; m < maxRow + 1; m++) {
-						for(n = minCol; n < maxCol + 1; n++) {
-							if(gen1[i][j].equals(liveCell)) {
+					for(int m = minRow; m < maxRow; m++) {
+						for(int n = minCol; n < maxCol; n++) {
+							if(gen1[m][n] == liveCell) {
 								count++;
 							}
 						}
 					}
 					
 					//Account for adding self and inflating count.
-					if(gen1[i][j].equals(liveCell)) {
+					if(gen1[i][j] == liveCell) {
 						count--;
 					}
 				
 					//Birth, survival, and overcrowding/loneliness rules executed.
-					if(count == 3 && gen1[i][j].equals(deadCell)) {
+					if(count == 3 && gen1[i][j] == deadCell) {
 						gen2[i][j] = liveCell;
-					} else if ((count == 2 || count == 3) && gen1[i][j].equals(liveCell)) {
+					} else if ((count == 2 || count == 3) && gen1[i][j] == liveCell) {
 						gen2[i][j] = liveCell;
 					} else {
 						gen2[i][j] = deadCell;
