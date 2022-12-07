@@ -24,6 +24,9 @@ public class GameController
 			view.show();
 		}
 		
+		int generations;
+		int curGen = 1;
+		
 		//QueryListener methods
 		public void heightEntered(int h) {
 			model.setHeight(h);
@@ -38,27 +41,29 @@ public class GameController
 			model.setDead(d);
 		}
 		public void delimiterEntered(char del) {
-			model.setDelimiter(del);
+			view.setDelimiter(del);
 		}
-		/* MIGHT BE WRONG PLACE
 		public void genEntered(int g) {
-			model.setGenerations(g);
+			this.generations = g;
 		}
-		*/
 		public void sleepEntered(int s) {
-			model.setSleepTime(s);
+			model.setSleep(s);
 		}
 		public void patternEntered(String p) {
 			model.setPattern(p);
-			model.createGrid();
+			view.setCurGen(curGen);
+			view.displayGen(model.createGrid());
+			for(int i = 0; i < generations - 1; i++) {
+				curGen++;
+				view.setCurGen(curGen);
+				view.displayGen(model.gameGeneration());
+			}
 		}
-		
-		/* REFERENCE / UNFIMPLEMENTED	
-		//For loop to execute multiple generations of game. INCOMPLETE (I think this goes in the view code?)
-		for(int i = 0; i < generations; i++) {
-			view.displayGen(model.gameGeneration());
+		public void quit() {
+			view = null;
+			model = null;
+			System.exit(0);
 		}
-		*/
 		
 		public static void main(String[] args) {
 			if (args.length < 2) {
@@ -68,7 +73,7 @@ public class GameController
 			try {
 				new GameController(
 				(GameViewInterface)Class.forName(args[0]).getDeclaredConstructor().newInstance(),
-				(GameModelInterface)Class.forName(args[1]).getDeclaredConstructor().newInstance();
+				(GameModelInterface)Class.forName(args[1]).getDeclaredConstructor().newInstance());
 			} catch (Exception e) {
 				System.out.println("Invalid class name.");
 				e.printStackTrace();
