@@ -15,7 +15,7 @@ public class GameView implements GameViewInterface {
     String sleepPrompt = "";
     String patternPrompt = "";
 	char delimiter;
-	int generations;
+	int curGen;
 
     QueryListener queryListener = null;
 	
@@ -52,8 +52,8 @@ public class GameView implements GameViewInterface {
         this.genPrompt = g;
     }
 	
-	public void setGenerations(int gen) {
-		this.generations = gen;
+	public void setCurGen(int gen) {
+		this.curGen = gen;
 	}
 
     public void setSleepPrompt (String s) {
@@ -97,8 +97,8 @@ public class GameView implements GameViewInterface {
 		return genPrompt;
 	}
 	
-	public int getGenerations() {
-		return generations;
+	public int getCurGen() {
+		return curGen;
 	}
 	
 	public String getSleepPrompt() {
@@ -123,61 +123,50 @@ public class GameView implements GameViewInterface {
         boolean exit = false;
 
        // while (!exit) {
-            System.out.println(getHeightPrompt());
-			height = sc.nextInt();
-			queryListener.heightEntered(height);
+        System.out.println(getHeightPrompt());
+		height = sc.nextInt();
+		queryListener.heightEntered(height);
+		
+		System.out.println(getWidthPrompt());
+		width = sc.nextInt();
+		queryListener.widthEntered(width);
 			
-			System.out.println(getWidthPrompt());
-			width = sc.nextInt();
-			queryListener.widthEntered(width);
+		System.out.println(getLivePrompt());
+		live = sc.next().charAt(0);
+		queryListener.liveEntered(live);
 			
-			System.out.println(getLivePrompt());
-			live = sc.next().charAt(0);
-			queryListener.liveEntered(live);
+		System.out.println(getDeadPrompt());
+		dead = sc.next().charAt(0);
+		queryListener.deadEntered(dead);
 			
-			System.out.println(getDeadPrompt());
-			dead = sc.next().charAt(0);
-			queryListener.deadEntered(dead);
+		System.out.println(getDelimiterPrompt());
+		delimiter = sc.next().charAt(0);
 			
-			System.out.println(getDelimiterPrompt());
-			delimiter = sc.next().charAt(0);
+		System.out.println(getGenPrompt());
+		gen = sc.nextInt();
+		queryListener.genEntered(gen);
 			
-			System.out.println(getGenPrompt());
-			gen = sc.nextInt();
-			queryListener.genEntered(gen);
+		System.out.println(getSleepPrompt());
+		sleep = sc.nextInt();
+		queryListener.sleepEntered(sleep);
 			
-			System.out.println(getSleepPrompt());
-			sleep = sc.nextInt();
-			queryListener.sleepEntered(sleep);
-			
-			System.out.println(getPatternPrompt());
-			pattern = sc.next();
-			queryListener.patternEntered(pattern);
-			
-          /*  System.out.println("Play again? (Y/N)");
-            if (input.equalsIgnoreCase("n")) {
-				exit = true;
-				queryListener.quit();
-			} //if
-        } // while*/
+		System.out.println(getPatternPrompt());
+		pattern = sc.next();
+		queryListener.patternEntered(pattern);			
     } // show()
-	/* the example mvc number problem uses getters here and the listener
-	but i'm not sure that's necessary? */
-
+	
     public void displayGen(char[][] g) {
-		System.out.println("Game of Life - Generation: " + 2);
+		System.out.println("Game of Life - Generation: " + getCurGen());
         for(int row = 0; row < g.length; row++) {
             for(int column = 0; column < g[row].length; column++) {
                 System.out.print(g[row][column] + "  ");
             } // columns
 			System.out.println();
         } // rows
-	
-	//display delimiter
-	char[] delimiterArray = new char[g.length];
-        for (char c:delimiterArray){
-            delimiter[c] = delimiter;
-            System.out.print(delimiter[c]);
-        }
+		//Print delimiter.
+		for(int i = 0; i < (g.length * 3); i++) {
+			System.out.print(getDelimiter());
+		}
+		System.out.println();
     } // displayGen
 } // end	
