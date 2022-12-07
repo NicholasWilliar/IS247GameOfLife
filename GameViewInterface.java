@@ -20,21 +20,57 @@ public interface GameViewInterface {
 	//Set width prompt.
 	void setWidthPrompt(String w);
 	
-	//Set live character.
+	//Set live character prompt.
 	void setLivePrompt(String l);
 	
-	//Set dead character.
+	//Set dead character prompt.
 	void setDeadPrompt(String d);
 	
-	//Set delimiter character.
+	//Set delimiter character prompt.
 	void setDelimiterPrompt(String del);
+	
+	//Set delimiter.
+	void setDelimiter(char delim);
 	
 	//Set generation prompt.
 	void setGenPrompt(String g);
+	
+	//Set current generation.
+	void setCurGen(int gen);
 	
 	//Set sleep prompt.
 	void setSleepPrompt(String s);
 	
 	//Set pattern prompt.
 	void setPatternPrompt(String p);
+	
+	//Get height prompt.
+	String getHeightPrompt();
+	
+	//Get width prompt.
+	String getWidthPrompt();
+	
+	//Get live character prompt.
+	String getLivePrompt();
+	
+	//Get dead character prompt.
+	String getDeadPrompt();
+	
+	//Get delimiter character prompt.
+	String getDelimiterPrompt();
+	
+	//Get delimiter.
+	char getDelimiter();
+	
+	//Get generations prompt.
+	String getGenPrompt();
+	
+	//Get current generation.
+	int getCurGen();
+	
+	//Get sleep prompt.
+	String getSleepPrompt();
+	
+	//Get pattern prompt.
+	String getPatternPrompt();
 }
