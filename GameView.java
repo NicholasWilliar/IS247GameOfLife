@@ -14,6 +14,8 @@ public class GameView implements GameViewInterface {
     String genPrompt = "";
     String sleepPrompt = "";
     String patternPrompt = "";
+    String introduction = "";
+    String conclusion = "";
 	char delimiter;
 	int curGen;
 
@@ -67,6 +69,14 @@ public class GameView implements GameViewInterface {
     public void setListener(QueryListener ql){
         this.queryListener = ql;
     }
+    
+    public void setIntroduction (String i){
+        this.introduction = i;
+    }
+
+    public void setConclusion (String c){
+        this.conclusion = c;
+    }
 	
 	//Get prompts.
 	protected String getHeightPrompt() {
@@ -108,6 +118,14 @@ public class GameView implements GameViewInterface {
 	protected String getPatternPrompt() {
 		return patternPrompt;
 	}
+	
+	protected String getIntroduction() {
+        return introduction;
+    	}
+
+    	protected String getConclusion() {
+        	return conclusion;
+    	}
 
     // show/display
     public void show() {
@@ -121,6 +139,8 @@ public class GameView implements GameViewInterface {
         String input = "";
         boolean exit = false;
 
+	System.out.println(getIntroduction());
+	
         System.out.println(getHeightPrompt());
 		height = sc.nextInt();
 		queryListener.heightEntered(height);
@@ -150,7 +170,9 @@ public class GameView implements GameViewInterface {
 			
 		System.out.println(getPatternPrompt());
 		pattern = sc.next();
-		queryListener.patternEntered(pattern);			
+		queryListener.patternEntered(pattern);
+		
+		System.out.println(getConclusion());
     } // show()
 	
     public void displayGen(char[][] g) {
