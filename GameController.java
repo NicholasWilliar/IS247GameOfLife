@@ -12,6 +12,19 @@ public class GameController
 		public GameController(GameViewInterface view, GameModelInterface model) {
 			this.view = view;
 			this.model = model;
+			
+			view.setIntroduction("--------------------------------------------------------------------------------\n" +
+                		"Welcome to the John Conway's Game of Life\n" +
+                		"by Katarina Nitz and Nicholas Williar\n" +
+                		"The Game of Life is a zero-player game in which a starting grid-based\n" +
+                		"pattern evolves based on the following set of three rules:\n" +
+                		"1) Birth: A dead cell with exactly three live neighbors becomes a live cell.\n" +
+                		"2) Survival: A live cell with two or three live neighbors stays alive.\n" +
+                		"3) Overcrowding/ Loneliness: In all other cases, a cell dies or remains dead.\n" +
+                		"Follow the prompts to play.\n" +
+               			"Enjoy!\n" +
+                		"--------------------------------------------------------------------------------\n");
+			
 			view.setHeightPrompt("Enter height: ");
 			view.setWidthPrompt("Enter width: ");
 			view.setLivePrompt("Enter live character: ");
@@ -19,8 +32,17 @@ public class GameController
 			view.setDelimiterPrompt("Enter delimiter character: ");
 			view.setGenPrompt("Enter number of generations: ");
 			view.setSleepPrompt("Enter time between generations (ms): ");
-			view.setPatternPrompt("Enter pattern file name: ");
+			view.setPatternPrompt("Enter a pattern name from the list below:\n" +
+                		"Glider.pat\n" +
+                		"GliderGun.pat\n" +
+                		"Exploder.pat\n" +
+                		"10CellRow.pat\n" +
+                		"Spaceship.pat\n" +
+                		"Tumbler.pat");
 			view.setListener(this);
+			
+			view.setConclusion("Thank you for playing!");
+			
 			view.show();
 		}
 		
