@@ -43,4 +43,10 @@ public interface GameViewInterface {
 	
 	//Set pattern prompt.
 	void setPatternPrompt(String p);
+	
+	//Create introduction
+	void setIntroduction(String i);
+	
+	//Create conclusion
+    	void setConclusion(String c);
 }
